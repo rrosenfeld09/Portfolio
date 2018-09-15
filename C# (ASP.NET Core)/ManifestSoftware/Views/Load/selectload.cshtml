@@ -1,0 +1,21 @@
+@model loadList
+
+<div class = "container">
+    <h1>|| SELECT A LOAD TO JOIN OR CREATE A NEW LOAD ||</h1>
+
+    @{
+        foreach(var load in @Model.loads)
+        {
+            <div>
+                <a href="/load/homepage/@load.load_id"><h3>@load.load_id</h3></a>
+            </div>
+        }
+    }
+
+    <form action="/CreateLoad">
+        <input class = "minibutton" type="submit" value = "Start New Load!">
+    </form>
+
+
+    <a href="/logout">Logout</a>
+</div>

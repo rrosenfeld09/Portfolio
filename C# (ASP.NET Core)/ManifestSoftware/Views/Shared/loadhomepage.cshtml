@@ -1,0 +1,71 @@
+@model LoadHomePageViewModel
+
+<div class = "container">
+    <h1>Welcome to load #@Model.load.load_id, @Model.user.first_name</h1>
+
+    <h3>Here's who you're flying with:</h3>
+    @{
+        if(@Model.manifests.Count < 1)
+        {
+            <p>No one has joined yet! Be the first.</p>
+        }
+        foreach (var manifest in @Model.manifests)
+        {
+            <p>@manifest.user.first_name</p>
+        }
+    }
+    <span>@TempData["JoinError"]</span>
+    <form action="/join_load/@Model.load.load_id">
+        <input type="submit" value = "Join Load!">
+    </form>
+
+    <hr>
+
+    <form asp-action="CreatePost" asp-controller="Post" method="POST">
+        <span asp-validation-for="post.post_content"></span>
+        <label asp-for="post.post_content">Post:</label>
+        <input asp-for="post.post_content">
+
+        <input type="hidden" asp-for="post.load_id" value="@Model.load.load_id">
+
+        <input type="hidden" asp-for="post.user_id" value="@Model.user.user_id">
+
+
+        <input type="submit" value = "Submit Post">
+    </form>
+
+    <div class = "post">
+        @foreach(var post in @Model.posts)
+        {
+            <h4>@post.post_content</h4>
+            <h6>by @post.user.first_name on @post.created_at.ToString("MM/dd h:mm tt")</h6>
+
+            foreach(var comment in @Model.comments)
+            {
+                if(@comment.post_id == @post.post_id)
+                {
+                    <p>@comment.comment_content</p>
+                }
+            }
+
+
+            <form asp-action="CreateComment" asp-controller="Comment" method="POST">
+                <span asp-validation-for="comment.comment_content"></span>
+                <input asp-for="comment.comment_content" placeholder="Write comment here..">
+
+                <input asp-for="comment.user_id" type="hidden" value="@post.user_id">
+
+                <input asp-for="comment.load_id" type="hidden" value="@post.load_id">
+
+                <input asp-for="comment.post_id" type="hidden" value="@post.post_id">
+
+                <input type="submit" value="Post comment">
+            </form>
+            <hr>
+        }
+    </div>
+
+
+    <a href="/select_load">Home</a>
+    <a href="/logout">Logout</a>
+</div>
