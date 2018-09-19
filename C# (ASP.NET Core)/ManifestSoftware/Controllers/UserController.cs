@@ -9,7 +9,7 @@ using ManifestSoftware.Models;
 
 namespace ManifestSoftware.Controllers
 {
-    public class UserController : Controller
+    public class UserController : BaseEntity
     {
 
         public MyContext _context;
@@ -19,22 +19,14 @@ namespace ManifestSoftware.Controllers
             _context = context;
         }
 
-        public bool IsUserInSession()
-        {
-            if(HttpContext.Session.GetInt32("loggedUser") == null)
-            {
-                return false;
-            }
-            return true;
-        }
-
         [HttpGet("")]
         public IActionResult Index()
         {
             if(IsUserInSession())
             {
-                return RedirectToAction("HomePage");
+                return RedirectToAction("SelectLoad", "Load");
             }
+
             return View();
         }
 
@@ -43,9 +35,12 @@ namespace ManifestSoftware.Controllers
         {
             if(IsUserInSession())
             {
-                return RedirectToAction("HomePage");
+                return RedirectToAction("SelectLoad", "Load");
             }
-            return View();
+            else
+            {
+                return View();
+            }
         }
 
         [HttpPost("create_user_action")]
@@ -93,20 +88,25 @@ namespace ManifestSoftware.Controllers
             .Where(p => p.email == sumbittedUser.loginUser.email)
             .FirstOrDefault();
 
-            if(returnUser == null)
+            if(ModelState.IsValid)
             {
-                TempData["ErrorLogin"] = "Email not yet registered";
-                return View("LogReg");
+                if(returnUser == null)
+                {
+                    TempData["ErrorLogin"] = "Email not yet registered";
+                    return View("LogReg");
+                }
+                
+                var Hasher = new PasswordHasher<User>();
+                if(0 != Hasher.VerifyHashedPassword(returnUser, returnUser.password, sumbittedUser.loginUser.password))
+                {
+                    HttpContext.Session.SetInt32("loggedUser", returnUser.user_id);
+                    return RedirectToAction("SelectLoad", "Load");
+                }
             }
-            
-            var Hasher = new PasswordHasher<User>();
-            if(0 != Hasher.VerifyHashedPassword(returnUser, returnUser.password, sumbittedUser.loginUser.password))
+            if(sumbittedUser.loginUser.email != null)
             {
-                HttpContext.Session.SetInt32("loggedUser", returnUser.user_id);
-                return RedirectToAction("SelectLoad", "Load");
+                TempData["ErrorLogin"] = "Wrong email/password";
             }
-
-            TempData["ErrorLogin"] = "Wrong email/password";
             return View("LogReg");
         }
     }

@@ -1,21 +1,21 @@
 @model loadList
 
-<div class = "container">
-    <h1>|| SELECT A LOAD TO JOIN OR CREATE A NEW LOAD ||</h1>
+<div class = "containerLoad">
+    <h1>Join an existing load or start your own</h1>
 
     @{
         foreach(var load in @Model.loads)
         {
-            <div>
-                <a href="/load/homepage/@load.load_id"><h3>@load.load_id</h3></a>
-            </div>
+            int num_seats_left = 14 - @load.current_manifested;
+            <form action="/load/homepage/@load.load_id">
+                <input id="airplaneButton" type="submit" value="Load @load.load_id (@num_seats_left spots left)">
+            </form>            
         }
     }
-
-    <form action="/CreateLoad">
-        <input class = "minibutton" type="submit" value = "Start New Load!">
-    </form>
-
-
-    <a href="/logout">Logout</a>
+    <div>
+        <form action="/CreateLoad">
+            <input id="minibutton" type="submit" value = "Start New Load!">
+        </form>
+        <p><a href="/logout">Logout</a></p> 
+    </div>
 </div>

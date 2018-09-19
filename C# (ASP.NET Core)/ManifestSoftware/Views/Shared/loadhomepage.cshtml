@@ -14,7 +14,7 @@
             <p>@manifest.user.first_name</p>
         }
     }
-    <span>@TempData["JoinError"]</span>
+    <span class = "Error">@TempData["JoinError"]</span>
     <form action="/join_load/@Model.load.load_id">
         <input type="submit" value = "Join Load!">
     </form>
@@ -22,9 +22,8 @@
     <hr>
 
     <form asp-action="CreatePost" asp-controller="Post" method="POST">
-        <span asp-validation-for="post.post_content"></span>
-        <label asp-for="post.post_content">Post:</label>
-        <input asp-for="post.post_content">
+        <span class = "Error" asp-validation-for="post.post_content"></span>
+        <input asp-for="post.post_content" placeholder="Write post here...">
 
         <input type="hidden" asp-for="post.load_id" value="@Model.load.load_id">
 
@@ -39,21 +38,29 @@
         {
             <h4>@post.post_content</h4>
             <h6>by @post.user.first_name on @post.created_at.ToString("MM/dd h:mm tt")</h6>
+            if(@post.user_id == @Model.user.user_id)
+            {
+                <a href="/delete_post/@post.post_id">Delete Post</a>
+            }
 
             foreach(var comment in @Model.comments)
             {
                 if(@comment.post_id == @post.post_id)
                 {
-                    <p>@comment.comment_content</p>
+                    <p>@comment.comment_content ~ @comment.user.first_name</p>
+                    if(@comment.user_id == @Model.user.user_id)
+                    {
+                        <a href="/delete_comment/@comment.comment_id">Delete Comment</a>
+                    }
                 }
             }
 
 
             <form asp-action="CreateComment" asp-controller="Comment" method="POST">
-                <span asp-validation-for="comment.comment_content"></span>
+                <span class = "Error" asp-validation-for="comment.comment_content"></span>
                 <input asp-for="comment.comment_content" placeholder="Write comment here..">
 
-                <input asp-for="comment.user_id" type="hidden" value="@post.user_id">
+                <input asp-for="comment.user_id" type="hidden" value="@Model.user.user_id">
 
                 <input asp-for="comment.load_id" type="hidden" value="@post.load_id">
 

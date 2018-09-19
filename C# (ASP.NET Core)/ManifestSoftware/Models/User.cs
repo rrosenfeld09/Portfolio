@@ -12,21 +12,21 @@ namespace ManifestSoftware.Models
         [Key]
         public int user_id {get; set;}
 
-        [Required(ErrorMessage = "Can't be blank")]
+        [Required(ErrorMessage = "Your first name can't be blank")]
         public string first_name {get; set;}
 
-        [Required(ErrorMessage = "Can't be blank")]
+        [Required(ErrorMessage = "Your last name can't be blank")]
         public string last_name {get; set;}
 
-        [Required(ErrorMessage = "Can't be blank")]
+        [Required(ErrorMessage = "Your email can't be blank")]
         [EmailAddress]
         public string email {get; set;}
 
-        [Required(ErrorMessage = "Can't be blank")]
+        [Required(ErrorMessage = "Your password can't be blank")]
         [MinLength(8, ErrorMessage = "Password must be at least 8 characters long")]
         public string password {get; set;}
 
-        [Required(ErrorMessage = "Can't be blank")]
+        [Required(ErrorMessage = "Your password confirmation can't be blank")]
         [NotMapped]
         public string confirm_pw {get; set;}
 
@@ -52,11 +52,11 @@ namespace ManifestSoftware.Models
 
     public class LoginUser
     {
-        [Required(ErrorMessage = "Can't be blank")]
+        [Required(ErrorMessage = "Your email can't be blank")]
         public string email {get; set;}
 
 
-        [Required(ErrorMessage = "Can't be blank")]
+        [Required(ErrorMessage = "Your password can't be blank")]
         public string password {get; set;}
     }
 }

@@ -9,26 +9,14 @@ using ManifestSoftware.Models;
 
 namespace ManifestSoftware.Controllers
 {
-    public class LoadController : Controller
+    public class LoadController : BaseEntity
     {
         public MyContext _context;
 
         public LoadController(MyContext context)
         {
             _context = context;
-        }
-
-
-        //HOW CAN I NOT DUPLICATE THIS METHOD?
-        public bool IsUserInSession()
-        {
-            if(HttpContext.Session.GetInt32("loggedUser") == null)
-            {
-                return false;
-            }
-            return true;
-        }
-        
+        }        
 
         [HttpGet("select_load")]
         public IActionResult SelectLoad()
@@ -58,7 +46,7 @@ namespace ManifestSoftware.Controllers
             _context.loads.Add(newLoad);
             _context.SaveChanges();
             
-            return RedirectToAction("SelectLoad");
+            return RedirectToAction("LoadHomePage", new{load_id = newLoad.load_id});
         }
 
         [HttpGet("load/homepage/{load_id}")]
@@ -72,7 +60,7 @@ namespace ManifestSoftware.Controllers
             LoadHomePageViewModel viewModel = new LoadHomePageViewModel();
 
             viewModel.user = _context.users
-            .Where(p => p.user_id == HttpContext.Session.GetInt32("loggedUser"))
+            .Where(p => p.user_id == LoggedUserId())
             .FirstOrDefault();
 
             viewModel.load = _context.loads
@@ -93,7 +81,7 @@ namespace ManifestSoftware.Controllers
             viewModel.comments = _context.comments
             .Where(p => p.load_id == load_id)
             .Include(p => p.user)
-            .OrderByDescending(p => p.created_at)
+            .OrderBy(p => p.created_at)
             .ToList();
 
             return View(viewModel);

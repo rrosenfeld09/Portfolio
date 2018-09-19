@@ -9,22 +9,13 @@ using ManifestSoftware.Models;
 
 namespace ManifestSoftware.Controllers
 {
-    public class CommentController : Controller
+    public class CommentController : BaseEntity
     {
         public MyContext _context;
 
         public CommentController(MyContext context)
         {
             _context = context;
-        }
-
-        public bool IsUserInSession()
-        {
-            if(HttpContext.Session.GetInt32("loggedUser") == null)
-            {
-                return false;
-            }
-            return true;
         }
 
         [HttpPost("create_comment")]
@@ -39,12 +30,35 @@ namespace ManifestSoftware.Controllers
 
             if(ModelState.IsValid)
             {
+                
                 _context.comments.Add(submittedComment.comment);
                 _context.SaveChanges();
                 return RedirectToAction("LoadHomePage", "Load", new {load_id = _load_id});
             }
 
             return RedirectToAction("LoadHomePage", "Load", new {load_id = _load_id});
+        }
+
+        [HttpGet("delete_comment/{comment_id}")]
+        public IActionResult DeleteComment(int comment_id)
+        {
+            if(IsUserInSession() == false)
+            {
+                return RedirectToAction("Index", "User");
+            }
+
+            Comment commentToDelete = _context.comments
+            .Where(p => p.comment_id == comment_id)
+            .FirstOrDefault();
+
+            if(commentToDelete.user_id == LoggedUserId())
+            {
+                _context.comments.Remove(commentToDelete);
+                _context.SaveChanges();
+                return RedirectToAction("LoadHomePage", "Load", new{load_id = commentToDelete.load_id});
+            }
+
+            return RedirectToAction("LoadHomePage", "Load", new{load_id = commentToDelete.load_id});
         }
     }
 }

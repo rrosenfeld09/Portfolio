@@ -1,4 +1,1 @@
-- add ability for users to comment on posts (comments specific to load)
-- add airplane graphic for selecting loads
-- nice css
-- add skydiving/plane images 
+- how to reset auto-incrementing load_id (start at 1 again)

@@ -416,3 +416,90 @@ there.
 
 /* Larger than Desktop HD */
 @media (min-width: 1200px) {}
+
+
+.Error{
+  color: red;
+}
+
+.containerIndex {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box; 
+}
+
+.indexImg{
+  width: 100%;
+  border-radius: 10px;
+}
+
+.containerLogin {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box; 
+  background-image: url('../img/airplane.jpg');
+  height: 500px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  border-radius: 10px;
+}
+
+
+.containerLoad {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box; 
+  height: 500px;
+}
+
+.containerLoad form{
+  display: inline;
+}
+
+#minibutton{
+  background-color: coral;
+}
+
+#airplaneButton{
+  background-image: url('../img/icon.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  width: 24%;
+  color: white;
+  height: 48%;
+  border: none;
+  margin: 2px;
+  font-size: 7.5px;
+}
+
+#loadTitle{
+  display: inline;
+  vertical-align: top;
+}
+
+#thing_to_do{
+  width: 400px;
+  font-weight: bold;
+  display: inline-block;
+  vertical-align: top;
+  margin: 15px;
+}
+
+#thing_to_do img{
+  width: 400px;
+}
+
+#footer{
+  text-align: center;
+}

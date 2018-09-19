@@ -9,22 +9,13 @@ using ManifestSoftware.Models;
 
 namespace ManifestSoftware.Controllers
 {
-    public class ManifestController : Controller
+    public class ManifestController : BaseEntity
     {
         public MyContext _context;
 
         public ManifestController(MyContext context)
         {
             _context = context;
-        }
-
-        public bool IsUserInSession()
-        {
-            if(HttpContext.Session.GetInt32("loggedUser") == null)
-            {
-                return false;
-            }
-            return true;
         }
 
         public void AdjustLoad(int load_id)
@@ -52,7 +43,7 @@ namespace ManifestSoftware.Controllers
 
             Manifest alreadyRegisteredCheck = _context.manifests
             .Where(p => p.load_id == load_id)
-            .Where(p => p.user_id == HttpContext.Session.GetInt32("loggedUser"))
+            .Where(p => p.user_id == LoggedUserId())
             .FirstOrDefault();
 
             if(alreadyRegisteredCheck != null)
@@ -62,7 +53,7 @@ namespace ManifestSoftware.Controllers
             }
 
             User loggedUser = _context.users
-            .Where(p => p.user_id == HttpContext.Session.GetInt32("loggedUser"))
+            .Where(p => p.user_id == LoggedUserId())
             .FirstOrDefault();
             Manifest newManifest = new Manifest(loggedUser.user_id, load_id);
 
