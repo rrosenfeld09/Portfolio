@@ -2,33 +2,35 @@
 
 <div class = "containerLogin">
     <h1>Register</h1>
-    <span class = "Error">@TempData["Error"]</span>
+    <p style="margin:0px;"><span class = "Error">@TempData["Error"]</span></p>
+    <p style="margin:0px;"><span class = "Error" asp-validation-for="user.first_name"></span></p>
+    <p style="margin:0px;"><span class = "Error" asp-validation-for="user.last_name"></span></p>
+    <p style="margin:0px;"><span class = "Error" asp-validation-for="user.email"></span></p>
+    <p style="margin:0px;"><span class = "Error" asp-validation-for="user.password"></span></p>
+    <p style="margin:0px;"><span class = "Error" asp-validation-for="user.confirm_pw"></span></p>
+
     <form asp-action="CreateUserAction" asp-controller="User" method="POST">
-        <span class = "Error" asp-validation-for="user.first_name"></span>
         <input asp-for="user.first_name" placeholder="First Name">
 
-        <span class = "Error" asp-validation-for="user.last_name"></span>
         <input asp-for="user.last_name" placeholder="Last Name">
 
-        <span class = "Error" asp-validation-for="user.email"></span>
         <input asp-for="user.email" placeholder="Email Address">
 
-        <span class = "Error" asp-validation-for="user.password"></span>
         <input asp-for="user.password" type="password" placeholder="Password">
 
-        <span class = "Error" asp-validation-for="user.confirm_pw"></span>
         <input asp-for="user.confirm_pw" type="password" placeholder="Confirm Password">
 
         <input type="submit" value="Register">
     </form>
 
     <h1>Login</h1>
-    <span class = "Error">@TempData["ErrorLogin"]</span>
+    <p style="margin:0px;"><span class = "Error">@TempData["ErrorLogin"]</span></p>
+    <p style="margin:0px;"><span class = "Error" asp-validation-for="loginUser.email"></span></p>
+    <p style="margin:0px;"><span class = "Error" asp-validation-for="loginUser.password"></span></p>
+
     <form asp-action="LoginAction" asp-controller="User" method="POST">
-        <span class = "Error" asp-validation-for="loginUser.email"></span>
         <input asp-for="loginUser.email" placeholder="Email Address">
 
-        <span asp-validation-for="loginUser.password"></span>
         <input asp-for="loginUser.password" type="password" placeholder="Password">
 
         <input type="submit" value = "Login">

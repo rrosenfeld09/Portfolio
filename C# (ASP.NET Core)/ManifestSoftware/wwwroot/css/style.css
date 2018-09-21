@@ -422,6 +422,10 @@ there.
   color: red;
 }
 
+#error_1{
+  margin: 0px;
+}
+
 .containerIndex {
   position: relative;
   width: 100%;
