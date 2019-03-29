@@ -1,0 +1,28 @@
+@model LoginUser
+
+<h1 style="text-align: center;">2019 Big Bexercise Bash</h1>
+<h5 style="text-align: center;">A self-driven friendly competitive friendship competition team building activity aimed at working your butt off and getting better!</h5>
+<h2 style="text-align: center;">You want to be healty, your friends want you to be healthy, what's stopping you?</h1>
+        <h1 style="text-align: center;">Nothing.</h2>
+<hr style="max-width: 600px;">
+<h1 style="font-style: italic; text-align: center;">Sign In. Let's get to work.</h1>
+
+<div style="text-align: center;">
+    <p><span style="color: red;" asp-validation-for="email"></span></p> 
+    <p><span style="color: red;" asp-validation-for="password"></span></p>
+    <p style="color: red;">@ViewData["error"]</p> 
+</div>
+
+<form style="text-align:center;" asp-action="login" asp-controller="User" method="POST">
+    <input asp-for="email" type="text" placeholder="email">
+    <input asp-for="password" type="password" placeholder="password">
+    <input type="submit" value="sign in">
+</form>
+
+<p style="text-align:center;"><a id ="a-tag" href="/register">First time here? Let's sign you up.</a></p> 
+
+<img style="width: 850px; border-radius: 7px; margin-top: 10px; display: block; margin-left: auto; margin-right: auto; width: 50%;" src="~/img/fitness.jpg" alt="fitness">
+<hr style="max-width: 600px;">
+<p style="text-align:center; font-style:italic;">A Bexercise Production</p>
+
+

@@ -13350,11 +13350,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/richardrosenfeld/Documents/Learning/Coding Dojo/C#/PortfolioProject/ManifestSoftware/ManifestSoftware.csproj",
+      "projectUniqueName": "/Users/richardrosenfeld/Desktop/GitHub_Portfolio/C# (ASP.NET Core)/ManifestSoftware/ManifestSoftware.csproj",
       "projectName": "ManifestSoftware",
-      "projectPath": "/Users/richardrosenfeld/Documents/Learning/Coding Dojo/C#/PortfolioProject/ManifestSoftware/ManifestSoftware.csproj",
+      "projectPath": "/Users/richardrosenfeld/Desktop/GitHub_Portfolio/C# (ASP.NET Core)/ManifestSoftware/ManifestSoftware.csproj",
       "packagesPath": "/Users/richardrosenfeld/.nuget/packages/",
-      "outputPath": "/Users/richardrosenfeld/Documents/Learning/Coding Dojo/C#/PortfolioProject/ManifestSoftware/obj/",
+      "outputPath": "/Users/richardrosenfeld/Desktop/GitHub_Portfolio/C# (ASP.NET Core)/ManifestSoftware/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
