@@ -78,18 +78,34 @@
         <input style="background-color:greenyellow; width:338px;" type="submit" value="I worked out today (1 pt)">
     </form>
 </fieldset>
+<fieldset style="display:inline-block; vertical-align:top;">
+    <legend>Stretching</legend>
+    <form style="margin-bottom: 10px; " action="/add_points" method="POST">
+        <input type="hidden" name="user_id" value="@Model.user.user_id">
+        <input type="hidden" name="point_type" value="exercise_point">
+        <input type="hidden" name="point_value" value=".5">
+        <input type="hidden" name="description" value = "stretching">
+        <input style="background-color:greenyellow; width:338px;" type="submit" value="I stretched today (.5 pts)">
+    </form>
+</fieldset>
 </div>
 <div style="text-align:center;">
 
 
 <fieldset style="display:inline-block; vertical-align:top;">
     <legend>Consume Right</legend>
+    <div>
     <form  action="/add_points" method="POST">
         <input type="hidden" name="user_id" value="@Model.user.user_id">
         <input type="hidden" name="point_type" value="eating_point">
-        <input type="hidden" name="point_value" value=".5">
-        <input type="hidden" name="description" value = "ate healthy meal">
-        <input style="background-color:greenyellow; width:338px;" type="submit" value="I ate a healthy meal (.5 pt)">
+        <input type="hidden" name="description" value = "eating healthy meals">
+        <select name="point_value" style="background-color: bisque;">
+            <option value=".5">1 Healthy Meal</option>
+            <option value="1">2 Healthy Meals</option>
+            <option value="1.5">3 Healthy Meals</option>
+        </select>
+        <input style="background-color:greenyellow; width:225px; padding:0px;" type="submit" value="Log my meals (.5 pt/meal)">
+    </div>
     <form  action="/add_points" method="POST">
         <input type="hidden" name="user_id" value="@Model.user.user_id">
         <input type="hidden" name="point_type" value="eating_point">
